@@ -1,13 +1,29 @@
+from pydantic_settings import BaseSettings,SettingsConfigDict
+from pydantic import field_validator
+from typing import List
 import os
-from functools import lru_cache
 
-class Settings:
-    PROJECT_NAME: str = "Chat Echo API mvp"
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+    env_file=".env",
+    extra="ignore"
+    )
+
+    PROJECT_NAME: str = "SciAnno API mvp"
     VERSION: str = "0.1.0"
     DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     ASTRONAUT_API_URL: str = "http://api.open-notify.org/astros.json"
     TIMEOUT_SECONDS: int = int(os.getenv("TIMEOUT_SECONDS", "5"))
+    CORS_ORIGINS: list[str] = ["*"]  # Add this line
 
-@lru_cache()
-def get_settings() -> Settings:
-    return Settings()
+    @field_validator("CORS_ORIGINS", mode="before")
+    
+    @classmethod
+    def split_cors_origins(cls, value):
+        if isinstance(value, str):
+            return [origin.strip() for origin in value.split(",")]
+        return value
+
+settings = Settings()

@@ -1,9 +1,8 @@
-from datetime import datetime
+from datetime import datetime, UTC
 import random
 import httpx
-from config import get_settings
+from config import settings
 
-settings = get_settings()
 
 jokes = [
     "Why don’t scientists trust atoms? Because they make up everything!",
@@ -47,7 +46,7 @@ async def handle_space_query() -> str:
 
 
 def handle_time_query() -> str:
-    now = datetime.utcnow().strftime("%H:%M UTC on %Y-%m-%d")
+    now = datetime.now(UTC).strftime("%H:%M UTC on %Y-%m-%d")
     return f"🕒 The current UTC time is {now}"
 
 
