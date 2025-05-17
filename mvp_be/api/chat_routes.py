@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from models.message import Message
-from services.chat_logic import handle_message
+from mvp_be.models.message import Message
+from mvp_be.services.chat_logic import handle_message
 
 router = APIRouter()
 

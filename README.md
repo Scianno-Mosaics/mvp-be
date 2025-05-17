@@ -27,3 +27,18 @@ curl -X 'POST' \
   "message": "who is in space"
 }'
 ```
+
+## Dcoker build to test locally
+docker build -t mvp:latest .
+docker run -p 8081:8080 mvp-be:latest
+
+docker build --no-chache -t mvp-be .
+docker run -p 8081:8080 mvp-be
+
+
+## Google cloud run build and deploy
+
+
+
+
+

@@ -1,7 +1,7 @@
 from datetime import datetime, UTC
 import random
 import httpx
-from config import settings
+from mvp_be.config import settings
 
 
 jokes = [

@@ -1,5 +1,5 @@
 import pytest
-from services import chat_logic
+from mvp_be.services import chat_logic
 
 @pytest.mark.asyncio
 async def test_handle_space_query_success(monkeypatch):

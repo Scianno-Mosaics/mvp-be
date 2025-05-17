@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # Add this import
-from api.chat_routes import router as chat_router
-from config import settings
+from mvp_be.api.chat_routes import router as chat_router
+from mvp_be.config import settings
 
 
 
