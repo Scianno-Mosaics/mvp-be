@@ -13,7 +13,7 @@ poetry run pytest
 ```
 - to run the backend using poetry
 '''
-poetry run uvicorn main:app --reload --port 8081
+poetry run uvicorn mvp_be.main:app --reload --port 8081
 '''
 
 - curl command
@@ -37,6 +37,26 @@ docker run -p 8081:8080 mvp-be
 
 
 ## Google cloud run build and deploy
+
+- set up Global load balancer
+
+ - DNS
+
+ - deploy containe
+
+
+
+gcloud auth login
+gcloud config set project mvp-app-459119
+
+
+gcloud builds submit --tag us-central1-docker.pkg.dev/mvp-app-459119/my-repo/mvp-be .
+
+
+
+gcloud run deploy mvp-be --image us-central1-docker.pkg.dev/mvp-app-459119/my-repo/mvp-be --platform managed --region us-central1 --allow-unauthenticated
+
+
 
 
 
