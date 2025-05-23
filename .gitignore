@@ -77,3 +77,6 @@ logs/
 # Misc
 *.tmp
 *.cache
+
+#dev files
+uploads/
