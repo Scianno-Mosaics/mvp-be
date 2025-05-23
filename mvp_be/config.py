@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     ASTRONAUT_API_URL: str = "http://api.open-notify.org/astros.json"
     TIMEOUT_SECONDS: int = int(os.getenv("TIMEOUT_SECONDS", "5"))
+    UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "uploads")
     CORS_ORIGINS: list[str] = ["*"]  # Add this line
 
     @field_validator("CORS_ORIGINS", mode="before")

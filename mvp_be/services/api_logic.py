@@ -1,6 +1,10 @@
+from fastapi import FastAPI, File, UploadFile
+import os
+import shutil
 from datetime import datetime, UTC
 import random
 import httpx
+import magic  # Ensure you have python-magic installed
 from mvp_be.config import settings
 
 
@@ -10,6 +14,30 @@ jokes = [
     "Why do programmers hate nature? It has too many bugs.",
 ]
 
+async def handle_upload(file: UploadFile = File(...)):
+    upload_dir = settings.UPLOAD_DIR if settings.UPLOAD_DIR is not None else "uploads"
+    file_path = os.path.join(upload_dir, str(file.filename))
+
+    # Save file to disk
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    # Get file metadata
+    file_stat = os.stat(file_path)
+    file_size = file_stat.st_size
+    creation_time = datetime.fromtimestamp(file_stat.st_ctime).isoformat()
+
+    # Detect file type
+    mime = magic.Magic(mime=True)
+    file_type = mime.from_file(file_path)
+
+    return {
+        "filename": file.filename,
+        "size_bytes": file_size,
+        "created_at": creation_time,
+        "mime_type": file_type,
+        "path": file_path,
+    }
 
 async def handle_message(user_message: str) -> str:
     user_message = user_message.strip().lower()

@@ -13,7 +13,7 @@ poetry run pytest
 ```
 - to run the backend using poetry
 '''
-poetry run uvicorn mvp_be.main:app --reload --port 8081
+poetry run uvicorn mvp_be.main:app --reload --port 8080
 '''
 
 - curl command
