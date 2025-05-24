@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     ASTRONAUT_API_URL: str = "http://api.open-notify.org/astros.json"
     TIMEOUT_SECONDS: int = int(os.getenv("TIMEOUT_SECONDS", "5"))
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "uploads")
-    CORS_ORIGINS: list[str] = ["*"]  # Add this line
+    CORS_ORIGINS: list[str] = ["https://talk.dilly.cloud", "http://localhost:3000"]  # Add this line
 
     @field_validator("CORS_ORIGINS", mode="before")
     

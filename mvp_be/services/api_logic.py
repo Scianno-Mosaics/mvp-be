@@ -6,6 +6,7 @@ import random
 import httpx
 import magic  # Ensure you have python-magic installed
 from mvp_be.config import settings
+import json
 
 
 jokes = [
@@ -31,13 +32,14 @@ async def handle_upload(file: UploadFile = File(...)):
     mime = magic.Magic(mime=True)
     file_type = mime.from_file(file_path)
 
-    return {
+    result =  {
         "filename": file.filename,
         "size_bytes": file_size,
         "created_at": creation_time,
         "mime_type": file_type,
         "path": file_path,
     }
+    return json.dumps(result)
 
 async def handle_message(user_message: str) -> str:
     user_message = user_message.strip().lower()
